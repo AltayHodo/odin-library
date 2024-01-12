@@ -1,7 +1,7 @@
 const myLibrary = [];
 const bookContainer = document.querySelector('.book-container');
 const addBookButton = document.querySelector('.add-book-button');
-
+const bookForm = document.querySelector('.book-form');
 
 
 function Book(title, author, pages){
@@ -29,9 +29,10 @@ addBookToLibrary(book3);
 
 
 function updateDisplay(){
+  bookContainer.innerHTML = '';
   myLibrary.forEach(book => {
-    console.log(book)
     const bookDiv = document.createElement('div');
+    bookDiv.classList.add('bookDiv');
     bookDiv.innerHTML = `
       <div> ${book.title} </div>
       <div> ${book.author} </div>
@@ -43,8 +44,18 @@ function updateDisplay(){
 
 updateDisplay()
 
-addBookButton.addEventListener('click', addBook);
+bookForm.addEventListener('submit', addBook);
 
-function addBook(){
-  
+function addBook(event){
+  const title = document.querySelector('#title').value;
+  const author = document.querySelector('#author').value;
+  const pages = document.querySelector('#pages').value;
+  event.preventDefault();
+  console.log(title, author, pages);
+  const newBook = new Book(title, author, pages);
+  addBookToLibrary(newBook);
+  updateDisplay();
 }
+
+
+
