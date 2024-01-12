@@ -2,7 +2,7 @@ const myLibrary = [];
 const bookContainer = document.querySelector('.book-container');
 const addBookButton = document.querySelector('.add-book-button');
 const bookForm = document.querySelector('.book-form');
-
+const formDialog = document.querySelector('.form-dialog');
 
 function Book(title, author, pages, readStatus) {
   this.title = title;
@@ -14,15 +14,6 @@ function Book(title, author, pages, readStatus) {
 function addBookToLibrary(book) {
   myLibrary.push(book);
 }
-
-
-const book1 = new Book('harry potter', 'JK rowling', 343, true);
-const book2 = new Book('fortnite', 'John wick', 532, true);
-const book3 = new Book('big nate', 'lincoln pierce', 492, false);
-
-addBookToLibrary(book1);
-addBookToLibrary(book2);
-addBookToLibrary(book3);
 
 
 function updateDisplay() {
@@ -60,22 +51,27 @@ function updateDisplay() {
   addReadStatusEventListeners();
 }
 
-updateDisplay()
 
 bookForm.addEventListener('submit', addBook);
 
-function addBook(event) {
+function addBook() {
   const title = document.querySelector('#title').value;
   const author = document.querySelector('#author').value;
   const pages = document.querySelector('#pages').value;
   const readStatus = document.querySelector('#readStatus').checked;
 
-  event.preventDefault();
   const newBook = new Book(title, author, pages, readStatus);
   addBookToLibrary(newBook);
   updateDisplay();
+  resetForm();
 }
 
+function resetForm() {
+  document.querySelector('#title').value = '';
+  document.querySelector('#author').value = '';
+  document.querySelector('#pages').value = '';
+  document.querySelector('#readStatus').checked = false;
+}
 
 function addRemoveEventListeners() {
   const removeButtons = document.querySelectorAll('.remove-button');
@@ -90,23 +86,46 @@ function removeBook(e) {
   updateDisplay();
 }
 
-function addReadStatusEventListeners(){
+function addReadStatusEventListeners() {
   const readStatusButtons = document.querySelectorAll('.read-status-button');
   readStatusButtons.forEach(button => {
     button.addEventListener('click', toggleReadStatus);
   })
 }
 
-function toggleReadStatus(e){
+function toggleReadStatus(e) {
   const button = e.target;
   const isRead = (button.classList.contains('read'));
-  if(isRead){
+  if (isRead) {
     button.textContent = 'Not read';
     button.classList.add('not-read');
     button.classList.remove('read');
-  }else{
+  } else {
     button.textContent = 'Read';
     button.classList.add('read');
     button.classList.remove('not-read');
   }
 }
+
+addBookButton.addEventListener('click', () => {
+  formDialog.showModal()
+})
+
+formDialog.addEventListener("click", e => {
+  const dialogDimensions = formDialog.getBoundingClientRect()
+  if (
+    e.clientX < dialogDimensions.left ||
+    e.clientX > dialogDimensions.right ||
+    e.clientY < dialogDimensions.top ||
+    e.clientY > dialogDimensions.bottom
+  ) {
+    formDialog.close()
+    resetForm();
+  }
+})
+
+formDialog.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    resetForm();
+  }
+})

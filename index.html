@@ -20,19 +20,19 @@
     <button class="add-book-button">+ Add book</button>
   </div>
 
-  <form class="book-form" action="*" method="post">
-    <div class="form-title">Add new book</div>
-    <input type="text" name="title" id="title" placeholder="Title">
-    <input type="text" name="author" id="author" placeholder="Author">
-    <input type="number" name="pages" id="pages" placeholder="Pages">
-
-    <div class="read-status-row">
-      <span class="checkbox-text">Have you read it?</span>
-      <input type="checkbox" name="readStatus" id="readStatus">
-    </div>
-
-    <button type="submit" class="submit-button">Submit</button>
-  </form>
+  <dialog class="form-dialog">
+    <form class="book-form" action="*" method="dialog">
+      <div class="form-title">Add new book</div>
+      <input type="text" name="title" id="title" placeholder="Title" required>
+      <input type="text" name="author" id="author" placeholder="Author" required>
+      <input type="number" name="pages" id="pages" placeholder="Pages" required>
+      <div class="read-status-row">
+        <span class="checkbox-text">Have you read it?</span>
+        <input type="checkbox" name="readStatus" id="readStatus">
+      </div>
+      <button type="submit" class="submit-button">Submit</button>
+    </form>
+  </dialog>
 
   <div class="book-container">
   </div>
