@@ -63,14 +63,7 @@ function addBook() {
   const newBook = new Book(title, author, pages, readStatus);
   addBookToLibrary(newBook);
   updateDisplay();
-  resetForm();
-}
-
-function resetForm() {
-  document.querySelector('#title').value = '';
-  document.querySelector('#author').value = '';
-  document.querySelector('#pages').value = '';
-  document.querySelector('#readStatus').checked = false;
+  bookForm.reset()
 }
 
 function addRemoveEventListeners() {
@@ -120,12 +113,12 @@ formDialog.addEventListener("click", e => {
     e.clientY > dialogDimensions.bottom
   ) {
     formDialog.close()
-    resetForm();
+    bookForm.reset()
   }
 })
 
 formDialog.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    resetForm();
+    bookForm.reset()
   }
 })
