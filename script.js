@@ -32,11 +32,12 @@ function updateDisplay(){
   bookContainer.innerHTML = '';
   myLibrary.forEach(book => {
     const bookDiv = document.createElement('div');
-    bookDiv.classList.add('bookDiv');
+    bookDiv.classList.add('book-div');
     bookDiv.innerHTML = `
-      <div> ${book.title} </div>
+      <div class="title"> ${book.title} </div>
       <div> ${book.author} </div>
-      <div> ${book.pages} </div>
+      <div> ${book.pages} pages </div>
+      <button class="remove-button"> Remove </button>
     `;
     bookContainer.appendChild(bookDiv);
   });

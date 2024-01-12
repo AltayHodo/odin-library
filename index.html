@@ -7,23 +7,33 @@
   <title>Library</title>
   <script src="script.js" defer></script>
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Roboto:wght@400;500;700&family=Rubik+Doodle+Shadow&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
   <h1>Library</h1>
-  <button class="add-book-button">+ Add book</button>
+  <div class="add-book-container">
+    <button class="add-book-button">+ Add book</button>
+  </div>
+
   <form class="book-form" action="*" method="post">
     <div class="form-title">Add new book</div>
     <input type="text" name="title" id="title" placeholder="Title">
     <input type="text" name="author" id="author" placeholder="Author">
     <input type="number" name="pages" id="pages" placeholder="Pages">
+
     <div class="read-status-row">
       <span class="checkbox-text">Have you read it?</span>
       <input type="checkbox" name="readStatus" id="readStatus">
     </div>
-    <button type="submit" class="submit-button">Submit</button>
 
+    <button type="submit" class="submit-button">Submit</button>
   </form>
+
   <div class="book-container">
   </div>
 </body>
