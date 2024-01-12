@@ -30,17 +30,23 @@ addBookToLibrary(book3);
 
 function updateDisplay(){
   bookContainer.innerHTML = '';
-  myLibrary.forEach(book => {
+  myLibrary.forEach((book, index) => {
     const bookDiv = document.createElement('div');
     bookDiv.classList.add('book-div');
+    // bookDiv.dataset.index = index;
     bookDiv.innerHTML = `
       <div class="title"> ${book.title} </div>
       <div> ${book.author} </div>
       <div> ${book.pages} pages </div>
-      <button class="remove-button"> Remove </button>
+      <button 
+      class="remove-button"
+      data-index="${index}"> 
+        Remove 
+      </button>
     `;
     bookContainer.appendChild(bookDiv);
   });
+  addRemoveEventListeners();
 }
 
 updateDisplay()
@@ -59,4 +65,17 @@ function addBook(event){
 }
 
 
+function addRemoveEventListeners(){
+  const removeButtons = document.querySelectorAll('.remove-button');
+  removeButtons.forEach(button => {
+    button.addEventListener('click', removeBook);
+  })
+}
+
+function removeBook(e){
+  const index = (parseInt(e.target.dataset.index));
+  myLibrary.splice(index, 1);
+  updateDisplay();
+
+}
 
